@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI</title>
+</head>
+<body>
+    
+<input type="number" id="height" placeholder="augstums (m)">
+<input type="number" id="weight" placeholder="svars (kg)">
+<button id="button">Reiķināt</button>
+<p id="output"></p>
+
+<script>
+
+let button = document.getElementById("button");
+button.addEventListener("click", calculateBMI);
+
+
+function calculateBMI() {
+    let height = parseFloat(document.getElementById("height").value);
+    let weight = parseFloat(document.getElementById("weight").value);
+    let output = document.getElementById("output");
+
+    if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+        output.innerHTML = "Lūdzu ievadiet derīgus augstuma un svara parametrus.";
+        return;
+    }
+
+    let bmi = weight / (height * height);
+    let category;
+
+    switch (true) {
+        case (bmi <= 18.5):
+            category = "Nepietiekams svars";
+            break;
+        case (bmi <= 24.9):
+            category = "Normāls svars";
+            break;
+        case (bmi <= 29.9):
+            category = "Liekais svars";
+            break;
+        case (bmi >= 30):
+            category = "Aptaukošanās";
+            break;
+        default:
+            category = "Nav noteikts";
+    }
+
+    output.innerHTML = `${category}: ${bmi.toFixed(2)}`;
+}
+</script>
+
+</body>
+</html>
